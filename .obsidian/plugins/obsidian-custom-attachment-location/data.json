@@ -13,7 +13,7 @@
   "generatedAttachmentFileName": "file-${date:YYYYMMDDHHmmssSSS}",
   "includePaths": [],
   "jpegQuality": 0.8,
-  "markdownUrlFormat": "assets/${noteFileName}/${generatedAttachmantFileName}",
+  "markdownUrlFormat": "assets/${noteFileName}/${generatedAttachmentFileName}",
   "renamedAttachmentFileName": "",
   "shouldConvertPastedImagesToJpeg": false,
   "shouldDeleteOrphanAttachments": false,
@@ -26,5 +26,5 @@
   "treatAsAttachmentExtensions": [
     ".excalidraw.md"
   ],
-  "version": ""
+  "version": "9.18.3"
 }
