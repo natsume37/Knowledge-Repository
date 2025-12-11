@@ -2,6 +2,7 @@
 
 欢迎来到 Go 语言的世界！这份指南专为有 Python 基础的开发者设计，参考了 [TopGoer](https://www.topgoer.com/) 的知识体系，通过对比两种语言的异同，帮助你快速上手 Go。
 
+![700](assets/go语言基础/file-20251211191407254.png)
 ## 1. 核心差异概览
 
 | 特性         | Python               | Go                             |
