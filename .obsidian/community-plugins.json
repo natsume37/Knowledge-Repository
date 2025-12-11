@@ -1,5 +1,9 @@
 [
   "obsidian-custom-attachment-location",
   "obsidian-enhancing-export",
-  "obsidian-git"
+  "obsidian-git",
+  "templater-obsidian",
+  "dataview",
+  "file-explorer-note-count",
+  "calendar"
 ]
