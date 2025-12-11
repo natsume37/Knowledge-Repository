@@ -373,3 +373,10 @@ go get github.com/gin-gonic/gin
 - [TopGoer](https://www.topgoer.com/) - 系统的 Go 语言中文文档
 - [Go by Example](https://gobyexample.com/) - 通过例子学 Go
 - [Go Tour](https://tour.go.dev/) - 官方交互式教程
+
+# 感悟
+
+## 运行
+
+程序从package main 包的main方法开始运行，同一个包名的两个.go文件本质是一个文件、不需要import导入、可以直接引用。
+
