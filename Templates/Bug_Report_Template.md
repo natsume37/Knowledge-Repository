@@ -9,26 +9,30 @@ tags:
 # 🐛 Bug Report: [简短描述]
 
 ## 📍 环境信息
+
 - **OS**: Windows/Linux/Mac
 - **Language/Framework**: Python 3.x / Go 1.x
-- **Library Version**: 
+- **Library Version**:
 
 ## 📝 问题描述
+
 <!-- 详细描述遇到的问题，期望的行为是什么，实际发生了什么 -->
 
-
 ## 💻 代码片段 / 错误日志
+
 ```python
 # 粘贴报错的代码或 Traceback
 ```
 
 ## 🔍 排查过程
+
 1. 尝试了...
 2. 怀疑是...
 
 ## ✅ 解决方案
+
 <!-- 记录最终是如何解决的，方便日后复盘 -->
 
-
 ## 🔗 参考资料
+
 - [链接标题](URL)
