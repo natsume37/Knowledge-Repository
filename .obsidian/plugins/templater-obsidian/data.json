@@ -15,15 +15,15 @@
   "enable_folder_templates": true,
   "folder_templates": [
     {
-      "folder": "Templates",
+      "folder": "/",
       "template": "Templates/General_Note_Template.md"
     },
     {
-      "folder": "",
+      "folder": "10-Daily",
       "template": "Templates/Daily_Note_Template.md"
     },
     {
-      "folder": "",
+      "folder": "BUG",
       "template": "Templates/Bug_Report_Template.md"
     }
   ],

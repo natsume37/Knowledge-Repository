@@ -1,10 +1,11 @@
 ---
-created: {{date}} {{time}}
+created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 author: natsume37
-category: 
+category:
 tags:
-  - 
+  -
 ---
 
-# {{title}}
+# <% tp.file.title %>
 
+<% tp.file.cursor() %>

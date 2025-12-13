@@ -1,12 +1,12 @@
 ---
-created: {{date}} {{time}}
+created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 tags:
   - bug
   - status/pending
   - lang/python
 ---
 
-# 🐛 Bug Report: [简短描述]
+# 🐛 Bug Report: <% tp.file.cursor() %>
 
 ## 📍 环境信息
 
