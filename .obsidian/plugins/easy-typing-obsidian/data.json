@@ -14,7 +14,7 @@
   "ChineseNoSpace": false,
   "QuoteSpace": true,
   "PunctuationSpace": false,
-  "AutoCapital": true,
+  "AutoCapital": false,
   "AutoCapitalMode": "typing",
   "PunctuationSpaceMode": "typing",
   "InlineCodeSpaceMode": 1,
