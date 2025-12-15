@@ -1,5 +1,4 @@
 [
-  "obsidian-custom-attachment-location",
   "obsidian-enhancing-export",
   "obsidian-git",
   "templater-obsidian",
@@ -10,5 +9,6 @@
   "easy-typing-obsidian",
   "obsidian-minimal-settings",
   "obsidian-style-settings",
-  "calendar"
+  "calendar",
+  "obsidian-custom-attachment-location"
 ]
