@@ -6,7 +6,7 @@ tags:
   - "#l蓝牙"
 ---
 
-# 🐛 Bug Report: 英特尔蓝牙驱动省电策略（Intel Bluetooth driver power-saving strategy ）导致蓝牙设备连接苦难问题
+# 🐛 Bug Report: 英特尔蓝牙驱动省电策略（Intel Bluetooth driver power-saving strategy ）导致蓝牙设备连接困难问题
 
 ## 📍 环境信息
 
