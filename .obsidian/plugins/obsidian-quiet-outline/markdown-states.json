@@ -18,5 +18,39 @@
       "item-3-8",
       "item-2-13"
     ]
+  },
+  "BUG/Intel蓝牙驱动的省电策略导致音响经常性无法连接.md": {
+    "scroll": 33.2949476632628,
+    "cursor": {
+      "from": {
+        "line": 7,
+        "ch": 0
+      },
+      "to": {
+        "line": 7,
+        "ch": 0
+      }
+    },
+    "expandedKeys": [
+      "item-1-0"
+    ]
+  },
+  "10-Daily/2025-12-16.md": {
+    "scroll": 7.392156862745098,
+    "cursor": {
+      "from": {
+        "line": 8,
+        "ch": 19
+      },
+      "to": {
+        "line": 8,
+        "ch": 19
+      }
+    },
+    "expandedKeys": [
+      "item-1-0",
+      "item-2-1",
+      "item-2-5"
+    ]
   }
 }
