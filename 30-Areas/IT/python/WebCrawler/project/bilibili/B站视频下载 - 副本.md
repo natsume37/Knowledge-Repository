@@ -9,28 +9,28 @@ tags:
 
 最近在学习一些东西需要用到B站的原视频、通过原视频加上阿里的[通义听悟](https://tingwu.aliyun.com/home)能够快速的做记笔记、生成文稿、同时通过采集音频等信息也给后续的学习添加了少许便利。
 
-![](Assets/B站视频下载/file-20251217153456057.png)
+![](https://natsume-1316988601.cos.ap-chengdu.myqcloud.com/image_own/file-20251217153456057.png)
 
 
 随便打开一个视频（这是我python的启蒙老师他的课程真的很不错、全是干货）
 
 ## 请求分析
 
-![](Assets/B站视频下载/file-20251217154228036.png)
+![](https://natsume-1316988601.cos.ap-chengdu.myqcloud.com/image_own/file-20251217154228036.png)
 
 这个请求就是我们浏览器URL的地址 观察返回的数据
 
-![](Assets/B站视频下载/file-20251217154357156.png)
+![](https://natsume-1316988601.cos.ap-chengdu.myqcloud.com/image_own/file-20251217154357156.png)
 
 返回的是一个 `HTML` 页面
 
-![](Assets/B站视频下载/file-20251217154542019.png)
+![](https://natsume-1316988601.cos.ap-chengdu.myqcloud.com/image_own/file-20251217154542019.png)
 
 在 `script` 代码里定义了有我们需要的信息
 
-![](Assets/B站视频下载/file-20251217154709356.png)
+![](https://natsume-1316988601.cos.ap-chengdu.myqcloud.com/image_own/file-20251217154709356.png)
 
-![](Assets/B站视频下载/file-20251217154741714.png)
+![](https://natsume-1316988601.cos.ap-chengdu.myqcloud.com/image_own/file-20251217154741714.png)
 
 主要包括：**当前账户支持的**不同分辨率的视频链接、以及音频链接
 
@@ -90,5 +90,5 @@ audio和video被正常下载
 通过 FFmpeg 进行合并转码操作、将m4s切片转为MP4等其它格式。
 ### 效果
 
-![](Assets/B站视频下载/file-20251217162433097.png)
+![](https://natsume-1316988601.cos.ap-chengdu.myqcloud.com/image_own/file-20251217162433097.png)
 
