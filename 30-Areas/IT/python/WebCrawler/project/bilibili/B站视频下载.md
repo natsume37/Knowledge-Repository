@@ -36,14 +36,19 @@ tags:
 
 经过gemini了解到：B站使用 **DASH (Dynamic Adaptive Streaming over HTTP)** 技术来播放视频。这意味着视频（画面）和音频（声音）是分开传输的，并且视频有多种清晰度和编码格式。
 
-所以最后我们请求到音频和视频文件后要进行合并处理。
+- 请求视频URL：  
+https://www.bilibili.com/video/BV1Hx2DBhEve/?vd_source=1a5796df38d45b002f615567954d7129&spm_id_from=333.788.player.switch
+- 用正则表达式截取 `window\.__playinfo__=(.*?)</script>` 的内容将其转为python的字典格式，方面我们对url链接进行提取
+- 用`requests`库携带 `cookie` 以及 `header` 进行请求获取 `video` 和 `audio`
+- 用 `FFmpeg` 工具对m4s切片进行合并以及转码处理、转为MP4视频文件
 
-直接请求视频音频的链接会报443错误
 
-（说起来很奇怪、我爬的时候一直打不开、我写文章的时候能正常请求了???）
+
 ### 注意
 
-在后续请求中一定要加 `Referer` 要不然一直443。
+在后续请求中一定要加 `Referer` 要不然一直443
+
+（说起来很奇怪、我爬的时候一直打不开、我写文章的时候能正常请求了???）
 
 ## 实验代码
 
@@ -76,11 +81,14 @@ with open('audio.m4s', 'wb') as f:
 print("audio downloaded")
 ```
 
+audio和video被正常下载
 
 ## 参数化
 
-将常量改为变量处理、这里唯一需要变的就是 `cookie` 和 `视频URL` 由于我尝试写登录脚本、奈何现状有二维码验证（还没学）、目前只能手动复制 `cookie` 来解决
+将常量改为变量处理、这里唯一需要变的就是 `cookie` 和 `视频URL` 。我尝试写登录脚本、奈何现状有二维码验证（还没学）、目前只能手动复制 `cookie` 来解决。
 
 通过 FFmpeg 进行合并转码操作、将m4s切片转为MP4等其它格式。
 ### 效果
+
+![](Assets/B站视频下载/file-20251217162433097.png)
 
