@@ -86,19 +86,21 @@
     "expandedKeys": []
   },
   "30-Areas/IT/python/WebCrawler/project/bilibili/B站视频下载.md": {
-    "scroll": 4.320987654320987,
+    "scroll": 65.58543554140407,
     "cursor": {
       "from": {
-        "line": 18,
-        "ch": 0
+        "line": 83,
+        "ch": 36
       },
       "to": {
-        "line": 18,
-        "ch": 0
+        "line": 83,
+        "ch": 36
       }
     },
     "expandedKeys": [
-      "item-1-0"
+      "item-1-0",
+      "item-2-1",
+      "item-2-4"
     ]
   }
 }

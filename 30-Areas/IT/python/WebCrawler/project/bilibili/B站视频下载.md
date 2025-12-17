@@ -16,3 +16,71 @@ tags:
 
 ## 请求分析
 
+![](Assets/B站视频下载/file-20251217154228036.png)
+
+这个请求就是我们浏览器URL的地址 观察返回的数据
+
+![](Assets/B站视频下载/file-20251217154357156.png)
+
+返回的是一个 `HTML` 页面
+
+![](Assets/B站视频下载/file-20251217154542019.png)
+
+在 `script` 代码里定义了有我们需要的信息
+
+![](Assets/B站视频下载/file-20251217154709356.png)
+
+![](Assets/B站视频下载/file-20251217154741714.png)
+
+主要包括：**当前账户支持的**不同分辨率的视频链接、以及音频链接
+
+经过gemini了解到：B站使用 **DASH (Dynamic Adaptive Streaming over HTTP)** 技术来播放视频。这意味着视频（画面）和音频（声音）是分开传输的，并且视频有多种清晰度和编码格式。
+
+所以最后我们请求到音频和视频文件后要进行合并处理。
+
+直接请求视频音频的链接会报443错误
+
+（说起来很奇怪、我爬的时候一直打不开、我写文章的时候能正常请求了???）
+### 注意
+
+在后续请求中一定要加 `Referer` 要不然一直443。
+
+## 实验代码
+
+```python
+import requests  
+  
+url = r'https://www.bilibili.com/video/BV1Hx2DBhEve/'  
+cookie = "你自己的cookie"  
+headers = {  
+    "Referer": url,  
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",  
+  
+}  
+s = requests.Session()  
+res = s.get(url, headers=headers)  
+print(res.text)  
+  
+url1 = 'https://upos-sz-estghw.bilivideo.com/upgcxcode/03/23/34616772303/34616772303-1-30120.m4s?e=ig8euxZM2rNcNbdlhoNvNC8BqJIzNbfqXBvEqxTEto8BTrNvN0GvT90W5JZMkX_YN0MvXg8gNEV4NC8xNEV4N03eN0B5tZlqNxTEto8BTrNvNeZVuJ10Kj_g2UB02J0mN0B5tZlqNCNEto8BTrNvNC7MTX502C8f2jmMQJ6mqF2fka1mqx6gqj0eN0B599M=&oi=3747235012&gen=playurlv3&deadline=1765956052&nbs=1&platform=pc&trid=dae5b19cf24146a5a2cd90e416074bdu&mid=646388511&os=estghw&og=hw&uipk=5&upsig=36f83070a157c648882e2358468116dc&uparams=e,oi,gen,deadline,nbs,platform,trid,mid,os,og,uipk&bvc=vod&nettype=0&bw=1610484&build=0&dl=0&f=u_0_0&agrr=0&buvid=D303155E-E607-49D6-67EB-9F307CD1320157336infoc&orderid=0,3'  
+video = s.get(url1, headers=headers)  
+with open('video.m4s', 'wb') as f:  
+    f.write(video.content)  
+  
+print("video downloaded")  
+  
+url1 = 'https://upos-sz-estghw.bilivideo.com/upgcxcode/03/23/34616772303/34616772303-1-30280.m4s?e=ig8euxZM2rNcNbdlhoNvNC8BqJIzNbfqXBvEqxTEto8BTrNvN0GvT90W5JZMkX_YN0MvXg8gNEV4NC8xNEV4N03eN0B5tZlqNxTEto8BTrNvNeZVuJ10Kj_g2UB02J0mN0B5tZlqNCNEto8BTrNvNC7MTX502C8f2jmMQJ6mqF2fka1mqx6gqj0eN0B599M=&uipk=5&platform=pc&mid=646388511&og=hw&deadline=1765956052&nbs=1&trid=dae5b19cf24146a5a2cd90e416074bdu&oi=3747235012&gen=playurlv3&os=estghw&upsig=782c79a8a8c15e8b53c6d9b6a4d0e0a6&uparams=e,uipk,platform,mid,og,deadline,nbs,trid,oi,gen,os&bvc=vod&nettype=0&bw=53929&agrr=0&buvid=D303155E-E607-49D6-67EB-9F307CD1320157336infoc&build=0&dl=0&f=u_0_0&orderid=0,3'  
+audio = s.get(url1, headers=headers)  
+with open('audio.m4s', 'wb') as f:  
+    f.write(audio.content)  
+  
+print("audio downloaded")
+```
+
+
+## 参数化
+
+将常量改为变量处理、这里唯一需要变的就是 `cookie` 和 `视频URL` 由于我尝试写登录脚本、奈何现状有二维码验证（还没学）、目前只能手动复制 `cookie` 来解决
+
+通过 FFmpeg 进行合并转码操作、将m4s切片转为MP4等其它格式。
+### 效果
+
