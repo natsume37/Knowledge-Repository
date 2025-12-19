@@ -1,6 +1,6 @@
 {
   "30-Areas/English/音标.md": {
-    "scroll": 152.3694976211578,
+    "scroll": 152.51381237980198,
     "cursor": {
       "from": {
         "line": 161,
@@ -157,6 +157,24 @@
       "item-2-1",
       "item-2-4",
       "item-2-8"
+    ]
+  },
+  "10-Daily/2025-12-19.md": {
+    "scroll": 0,
+    "cursor": {
+      "from": {
+        "line": 42,
+        "ch": 0
+      },
+      "to": {
+        "line": 42,
+        "ch": 0
+      }
+    },
+    "expandedKeys": [
+      "item-1-0",
+      "item-2-1",
+      "item-2-5"
     ]
   }
 }
