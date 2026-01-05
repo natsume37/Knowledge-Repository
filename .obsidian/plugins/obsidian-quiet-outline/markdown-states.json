@@ -235,5 +235,35 @@
       "item-2-1",
       "item-3-3"
     ]
+  },
+  "40-Resources/wechat/未命名.md": {
+    "scroll": 0,
+    "cursor": {
+      "from": {
+        "line": 8,
+        "ch": 5
+      },
+      "to": {
+        "line": 8,
+        "ch": 5
+      }
+    },
+    "expandedKeys": []
+  },
+  "40-Resources/wechat/Blog介绍.md": {
+    "scroll": 0,
+    "cursor": {
+      "from": {
+        "line": 10,
+        "ch": 0
+      },
+      "to": {
+        "line": 10,
+        "ch": 0
+      }
+    },
+    "expandedKeys": [
+      "item-1-0"
+    ]
   }
 }
