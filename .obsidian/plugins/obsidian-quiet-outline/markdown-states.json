@@ -265,5 +265,47 @@
     "expandedKeys": [
       "item-1-0"
     ]
+  },
+  "30-Areas/IT/python/package/未命名.md": {
+    "scroll": 0,
+    "cursor": {
+      "from": {
+        "line": 10,
+        "ch": 0
+      },
+      "to": {
+        "line": 10,
+        "ch": 0
+      }
+    },
+    "expandedKeys": []
+  },
+  "30-Areas/IT/python/package/th.md": {
+    "scroll": 0,
+    "cursor": {
+      "from": {
+        "line": 10,
+        "ch": 0
+      },
+      "to": {
+        "line": 10,
+        "ch": 0
+      }
+    },
+    "expandedKeys": []
+  },
+  "30-Areas/IT/python/package/pathlib.md": {
+    "scroll": 0,
+    "cursor": {
+      "from": {
+        "line": 16,
+        "ch": 24
+      },
+      "to": {
+        "line": 16,
+        "ch": 24
+      }
+    },
+    "expandedKeys": []
   }
 }
