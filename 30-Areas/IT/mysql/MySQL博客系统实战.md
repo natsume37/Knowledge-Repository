@@ -28,8 +28,12 @@ USE blog_system;
 
 -- 1. 用户表
 CREATE TABLE users (
+    -- INT UNSIGNED: 无符号整数 (非负)，比普通 INT 能存更大的正数
+    -- AUTO_INCREMENT: 自增，插入数据时不需要手动指定 ID
+    -- PRIMARY KEY: 主键，每行数据的唯一标识，且自带索引
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
+    -- UNIQUE: 唯一约束，保证邮箱不能重复
     email VARCHAR(100) NOT NULL UNIQUE
 ) ENGINE=InnoDB;
 
@@ -38,6 +42,8 @@ CREATE TABLE categories (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     parent_id INT UNSIGNED DEFAULT NULL COMMENT '父分类ID, NULL表示顶级',
+    -- FOREIGN KEY: 外键。约束 parent_id 必须是本表 id 列里已存在的值
+    -- 这就是“递归引用”，用于建立父子关系
     FOREIGN KEY (parent_id) REFERENCES categories(id)
 ) ENGINE=InnoDB;
 
@@ -48,9 +54,13 @@ CREATE TABLE posts (
     category_id INT UNSIGNED NOT NULL,
     title VARCHAR(200) NOT NULL,
     content TEXT NOT NULL,
+    -- ENUM: 枚举类型。status 字段的值只能是这三个字符串中的一个
+    -- DEFAULT: 如果插入时不指定该字段，默认填 'draft'
     status ENUM('draft', 'published', 'archived') DEFAULT 'draft',
     view_count INT UNSIGNED DEFAULT 0,
+    -- CURRENT_TIMESTAMP: 使用当前时间作为默认值
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    -- 建立与 users 和 categories 表的关联
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (category_id) REFERENCES categories(id)
 ) ENGINE=InnoDB;
@@ -65,7 +75,10 @@ CREATE TABLE tags (
 CREATE TABLE post_tags (
     post_id INT UNSIGNED NOT NULL,
     tag_id INT UNSIGNED NOT NULL,
+    -- 联合主键: 确保同一个帖子不能重复打同一个标签 (例如不能打两次 "技术" 标签)
     PRIMARY KEY (post_id, tag_id),
+    -- ON DELETE CASCADE: 级联删除。
+    -- 如果一篇文章被删了 (posts表里删了)，这里对应的关联记录也会自动删除
     FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
     FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
@@ -128,8 +141,11 @@ INSERT INTO comments (post_id, user_id, parent_id, content) VALUES
 -- 1. 文章列表
 SELECT p.title, u.username, c.name as category, p.created_at
 FROM posts p
+-- JOIN ... ON ... : "内连接"。只有当两个表都有匹配的数据时，才会返回这行。
+-- 这里通过 p.user_id = u.id 找到文章对应的作者
 JOIN users u ON p.user_id = u.id
 JOIN categories c ON p.category_id = c.id
+-- WHERE: 过滤条件，只选出状态为 published 的文章
 WHERE p.status = 'published';
 
 -- 2. 标签反查 (三表 JOIN)
@@ -160,12 +176,20 @@ WHERE t.name = '数据库';
 -- 1. 标签云
 SELECT t.name, COUNT(pt.post_id) as count
 FROM tags t
+-- LEFT JOIN: "左连接"。以左边的表 (tags) 为主。
+-- 即使某个标签没有关联任何文章 (右边 post_tags 为空)，这个标签依然会显示出来。
 LEFT JOIN post_tags pt ON t.id = pt.tag_id
+-- GROUP BY: "分组"。将数据按标签 ID 和名字折叠起来。
+-- COUNT() 函数会统计每组里有多少条记录。
 GROUP BY t.id, t.name
+-- ORDER BY ... DESC: 按数量"降序"排列 (从大到小)。
 ORDER BY count DESC;
 
 -- 2. 每月归档
-SELECT DATE_FORMAT(created_at, '%Y-%m') as `month`, COUNT(*) as total
+SELECT
+    -- DATE_FORMAT: 将时间裁切成 'YYYY-MM' 格式
+    DATE_FORMAT(created_at, '%Y-%m') as `month`,
+    COUNT(*) as total
 FROM posts
 WHERE status = 'published'
 GROUP BY `month`
@@ -197,13 +221,18 @@ ORDER BY `month` DESC;
 
 ```sql
 -- 任务 1: 向上递归找父级
+-- WITH RECURSIVE: 定义一个递归公用表表达式 (CTE)
 WITH RECURSIVE category_path AS (
+    -- 1. 锚点成员 (Anchor Member): 递归的起点
+    -- 这里我们先选出 ID=4 (MySQL) 这一行
     SELECT id, name, parent_id, 0 as level
     FROM categories
-    WHERE id = 4 -- 起点
+    WHERE id = 4
 
     UNION ALL
 
+    -- 2. 递归成员 (Recursive Member): 定义如何找到下一行
+    -- 这里的逻辑是：拿着上一轮的结果 (cp.parent_id), 去 categories 表里找 id 等于它的行 (即找爸爸)
     SELECT c.id, c.name, c.parent_id, cp.level - 1
     FROM categories c
     JOIN category_path cp ON c.id = cp.parent_id
@@ -213,13 +242,15 @@ SELECT name FROM category_path ORDER BY level;
 
 -- 任务 2: 向下递归找子级并统计
 WITH RECURSIVE sub_categories AS (
-    SELECT id FROM categories WHERE id = 1 -- 起点: 技术
+    SELECT id FROM categories WHERE id = 1 -- 起点: 技术 (找子孙)
     UNION ALL
+    -- 递归逻辑: 拿着上一轮的 id (sc.id), 去找 parent_id 等于它的行 (即找儿子)
     SELECT c.id FROM categories c
     JOIN sub_categories sc ON c.parent_id = sc.id
 )
 SELECT COUNT(*)
 FROM posts
+-- IN (...): 只要 category_id 在我们递归找出的所有 ID 列表里，就算进去
 WHERE category_id IN (SELECT id FROM sub_categories);
 ```
 
