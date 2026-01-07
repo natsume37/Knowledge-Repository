@@ -295,20 +295,23 @@
     "expandedKeys": []
   },
   "30-Areas/IT/python/package/pathlib.md": {
-    "scroll": 15.838235294117647,
+    "scroll": 242.2258979946959,
     "cursor": {
       "from": {
-        "line": 43,
-        "ch": 3
+        "line": 8,
+        "ch": 0
       },
       "to": {
-        "line": 43,
-        "ch": 3
+        "line": 263,
+        "ch": 51
       }
     },
     "expandedKeys": [
       "item-1-0",
-      "item-3-2"
+      "item-3-2",
+      "item-2-7",
+      "item-3-8",
+      "item-2-11"
     ]
   }
 }
